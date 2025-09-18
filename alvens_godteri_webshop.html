@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvens Godteri | Nettbutikk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Lora&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:Lora, serif; background:#ffe6e6; color:#111; }
+    header { background:#fff; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; }
+    header h1 { font-family:Poppins, sans-serif; margin:0; font-size:28px; }
+    nav a { margin:0 10px; text-decoration:none; color:#111; font-weight:bold; }
+    .products { padding:40px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+    .product { background:#fff; border-radius:12px; padding:20px; width:250px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .product img { width:100%; border-radius:8px; }
+    button { margin-top:10px; padding:10px 15px; border:none; border-radius:8px; background:#111; color:#fff; cursor:pointer; }
+    button:hover { background:#333; }
+    #cart { position:fixed; top:0; right:0; width:300px; height:100%; background:#fff; box-shadow:-2px 0 6px rgba(0,0,0,0.2); padding:20px; overflow-y:auto; display:none; }
+    #cart h2 { font-family:Poppins, sans-serif; }
+    footer { background:#111; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Alvens Godteri</h1>
+    <nav>
+      <a href="#">Produkter</a>
+      <a href="#">Om oss</a>
+      <a href="#">Kontakt</a>
+      <a href="#" onclick="toggleCart()">🛒 Handlekurv (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <section class="products">
+    <div class="product">
+      <img src="ROSENROT TINKTUR.png" alt="Rosenrot Tinktur">
+      <h3>Rosenrot Tinktur</h3>
+      <p>129 kr</p>
+      <button onclick="addToCart('Rosenrot Tinktur', 129)">Legg i kurv</button>
+    </div>
+    <div class="product">
+      <img src="cordyTINKTUR.png" alt="Cordyceps Tinktur">
+      <h3>Cordyceps Tinktur</h3>
+      <p>149 kr</p>
+      <button onclick="addToCart('Cordyceps Tinktur', 149)">Legg i kurv</button>
+    </div>
+    <div class="product">
+      <img src="REISHI SOPP  TINKTUR.png" alt="Reishi Sopp Tinktur">
+      <h3>Reishi Sopp Tinktur</h3>
+      <p>139 kr</p>
+      <button onclick="addToCart('Reishi Sopp Tinktur', 139)">Legg i kurv</button>
+    </div>
+    <div class="product">
+      <img src="Gemini_Generated_Image_a765yua765yua765.png" alt="Mix 1">
+      <h3>Alvens Godteri – Mix 1</h3>
+      <p>89 kr</p>
+      <button onclick="addToCart('Mix 1', 89)">Legg i kurv</button>
+    </div>
+  </section>
+
+  <aside id="cart">
+    <h2>Handlekurv</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: <span id="cart-total">0</span> kr</strong></p>
+    <button onclick="checkout()">Til kassen</button>
+  </aside>
+
+  <footer>
+    <p>Meld deg på nyhetsbrevet – få 10% rabatt på første bestilling</p>
+  </footer>
+
+  <script>
+    let cart = [];
+    function addToCart(product, price) {
+      cart.push({product, price});
+      document.getElementById('cart-count').innerText = cart.length;
+      renderCart();
+    }
+    function renderCart() {
+      const itemsList = document.getElementById('cart-items');
+      itemsList.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.product} – ${item.price} kr`;
+        itemsList.appendChild(li);
+        total += item.price;
+      });
+      document.getElementById('cart-total').innerText = total;
+    }
+    function toggleCart() {
+      const cartEl = document.getElementById('cart');
+      cartEl.style.display = (cartEl.style.display === 'block') ? 'none' : 'block';
+    }
+    function checkout() {
+      alert('Checkout funksjon kommer snart!');
+    }
+  </script>
+</body>
+</html>
