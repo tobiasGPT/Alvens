@@ -4,13 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Alvens Godteri | Nettbutikk</title>
-  <meta name="description" content="Alvens Godteri — naturlige tinkturer og godteri. Få 10% på første bestilling. Rask levering i hele Norge." />
+  <meta name="description" content="Alvens Godteri — naturlige tinkturer og mixpakker. Få 10% på første bestilling. Rask levering i hele Norge." />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;400&family=Lora&display=swap" rel="stylesheet">
-  <!-- Open Graph -->
   <meta property="og:title" content="Alvens Godteri | Nettbutikk" />
   <meta property="og:description" content="Naturlige tinkturer & mixpakker. 10% rabatt på første kjøp." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content="/images/og-image.png" />
   <meta name="theme-color" content="#ffe6e6" />
   <style>
     :root{
@@ -27,14 +26,13 @@
     .container{max-width:var(--container);margin:0 auto;padding:0 16px}
     h1{font-family:Poppins, sans-serif;margin:0;font-size:26px}
     nav a{margin:0 10px;text-decoration:none;color:var(--accent);font-weight:600}
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;padding:36px 0}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;padding:36px 0}
     .hero-left h2{margin:0 0 12px;font-size:28px;font-family:Poppins, sans-serif}
     .hero-left p{color:var(--muted);margin:0 0 18px}
     .cta-row{display:flex;gap:12px;align-items:center}
     .btn{background:var(--accent);color:#fff;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
     .btn.secondary{background:transparent;color:var(--accent);border:2px solid rgba(0,0,0,.06)}
     .price-badge{display:inline-block;background:#fff;padding:6px 10px;border-radius:999px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.06);margin-left:6px}
-    .hero-right{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
     .products{display:flex;gap:20px;flex-wrap:wrap;padding:24px 0;justify-content:center}
     .product{background:var(--card);border-radius:var(--radius);padding:14px;width:240px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
     .product img{width:100%;height:160px;object-fit:cover;border-radius:8px}
@@ -43,7 +41,6 @@
     .product .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
     .product .price{font-weight:700}
     .cart-toggle{position:fixed;right:16px;bottom:16px;background:var(--accent);color:#fff;padding:12px;border-radius:999px;cursor:pointer;z-index:60}
-    /* cart drawer */
     #cart{position:fixed;right:0;top:0;width:360px;height:100%;background:var(--card);box-shadow:-8px 0 30px rgba(0,0,0,.12);padding:20px;overflow:auto;transform:translateX(110%);transition:transform .28s ease-in-out;z-index:80}
     #cart.open{transform:translateX(0)}
     #cart h2{font-family:Poppins, sans-serif;margin-top:0}
@@ -73,13 +70,9 @@
   <main class="container" role="main">
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-left">
-        <!-- Tre ferdige headline-varianter. Bytt data-variant="consult" til aggr eller value for A/B -->
         <div id="hero-variants" data-variant="value">
-          <!-- Aggressive -->
           <h2 id="hero-heading" data-variant="aggr" style="display:none">Klar for bedre dagsform? Kjøp nå — begrenset lager!</h2>
-          <!-- Consultative -->
           <h2 data-variant="consult" style="display:none">Naturlige tinkturer som støtter hverdagen — vi hjelper deg finne riktig produkt.</h2>
-          <!-- Value-driven (default) -->
           <h2 data-variant="value">Naturlige tinkturer & kjærlighet på glass — 10% på første bestilling</h2>
         </div>
         <p>Rask levering i hele Norge. Håndplukkede ingredienser og trygg betaling.</p>
@@ -102,11 +95,11 @@
         <h3 id="promo-heading">Ukens tilbud</h3>
         <p style="margin:8px 0 12px;color:var(--muted)">Spar 20% på Mix 1 — begrenset antall.</p>
         <div style="display:flex;gap:12px;align-items:center">
-          <img src="/images/promo-mix1.jpg" alt="Mix 1 tilbud" style="width:120px;height:120px;border-radius:8px;object-fit:cover" loading="lazy" />
+          <img src="images/mix1.png" alt="Mix 1 tilbud" style="width:120px;height:120px;border-radius:8px;object-fit:cover" loading="lazy" onerror="this.src='images/placeholder.png'"/>
           <div>
             <strong>Mix 1</strong>
             <div style="margin-top:8px">
-              <button class="btn" onclick="addToCart('Mix 1', 89, '/images/promo-mix1.jpg')">Legg i kurv</button>
+              <button class="btn" onclick="addToCart('Mix 1', 89, 'images/mix1.png')">Legg i kurv</button>
             </div>
           </div>
         </div>
@@ -114,51 +107,76 @@
     </section>
 
     <section id="products" class="products" aria-label="Produkter">
-      <!-- Produktkort generert statisk for enkelhet -->
-      <article class="product" data-product='{"name":"Rosenrot Tinktur","price":129,"sku":"ROS-001"}' aria-labelledby="p1">
-        <img src="/images/rosenrot.png" alt="Rosenrot Tinktur" loading="lazy" />
-        <h3 id="p1">Rosenrot Tinktur</h3>
+      <!-- Chaga -->
+      <article class="product" data-product='{"name":"Chagasopp Tinktur","price":129,"sku":"CHG-001"}' aria-labelledby="p-chaga">
+        <img src="images/chagasopp-tinktur.png" alt="Chagasopp Tinktur" loading="lazy" onerror="this.src='images/placeholder.png'"/>
+        <h3 id="p-chaga">Chagasopp Tinktur</h3>
         <p class="price">129 kr</p>
         <div class="meta">
-          <button class="btn" onclick="addToCart('Rosenrot Tinktur',129,'/images/rosenrot.png')">Legg i kurv</button>
+          <button class="btn" onclick="addToCart('Chagasopp Tinktur',129,'images/chagasopp-tinktur.png')">Legg i kurv</button>
           <span style="color:var(--muted);font-size:13px">50 ml</span>
         </div>
       </article>
 
-      <article class="product" data-product='{"name":"Cordyceps Tinktur","price":149,"sku":"COR-001"}' aria-labelledby="p2">
-        <img src="/images/cordyceps.png" alt="Cordyceps Tinktur" loading="lazy" />
-        <h3 id="p2">Cordyceps Tinktur</h3>
+      <!-- Cordyceps -->
+      <article class="product" data-product='{"name":"Cordyceps Tinktur","price":149,"sku":"COR-001"}' aria-labelledby="p-cordy">
+        <img src="images/cordyceps-tinktur.png" alt="Cordyceps Tinktur" loading="lazy" onerror="this.src='images/placeholder.png'"/>
+        <h3 id="p-cordy">Cordyceps Tinktur</h3>
         <p class="price">149 kr</p>
         <div class="meta">
-          <button class="btn" onclick="addToCart('Cordyceps Tinktur',149,'/images/cordyceps.png')">Legg i kurv</button>
+          <button class="btn" onclick="addToCart('Cordyceps Tinktur',149,'images/cordyceps-tinktur.png')">Legg i kurv</button>
           <span style="color:var(--muted);font-size:13px">50 ml</span>
         </div>
       </article>
 
-      <article class="product" data-product='{"name":"Reishi Sopp Tinktur","price":139,"sku":"REI-001"}' aria-labelledby="p3">
-        <img src="/images/reishi.png" alt="Reishi Sopp Tinktur" loading="lazy" />
-        <h3 id="p3">Reishi Sopp Tinktur</h3>
+      <!-- Rosenrot -->
+      <article class="product" data-product='{"name":"Rosenrot Tinktur","price":129,"sku":"ROS-001"}' aria-labelledby="p-rosen">
+        <img src="images/rosenrot-tinktur.png" alt="Rosenrot Tinktur" loading="lazy" onerror="this.src='images/placeholder.png'"/>
+        <h3 id="p-rosen">Rosenrot Tinktur</h3>
+        <p class="price">129 kr</p>
+        <div class="meta">
+          <button class="btn" onclick="addToCart('Rosenrot Tinktur',129,'images/rosenrot-tinktur.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">50 ml</span>
+        </div>
+      </article>
+
+      <!-- Lion's Mane -->
+      <article class="product" data-product='{"name":"Lion\'s Mane Tinktur","price":149,"sku":"LIO-001"}' aria-labelledby="p-lion">
+        <img src="images/lionsmane-tinktur.png" alt="Lion's Mane Tinktur" loading="lazy" onerror="this.src='images/placeholder.png'"/>
+        <h3 id="p-lion">Lion's Mane Tinktur</h3>
+        <p class="price">149 kr</p>
+        <div class="meta">
+          <button class="btn" onclick="addToCart(\"Lion's Mane Tinktur\",149,'images/lionsmane-tinktur.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">50 ml</span>
+        </div>
+      </article>
+
+      <!-- Macarot -->
+      <article class="product" data-product='{"name":"Macarot Tinktur","price":139,"sku":"MAC-001"}' aria-labelledby="p-maca">
+        <img src="images/macarot-tinktur.png" alt="Macarot Tinktur" loading="lazy" onerror="this.src='images/placeholder.png'"/>
+        <h3 id="p-maca">Macarot Tinktur</h3>
         <p class="price">139 kr</p>
         <div class="meta">
-          <button class="btn" onclick="addToCart('Reishi Sopp Tinktur',139,'/images/reishi.png')">Legg i kurv</button>
+          <button class="btn" onclick="addToCart('Macarot Tinktur',139,'images/macarot-tinktur.png')">Legg i kurv</button>
           <span style="color:var(--muted);font-size:13px">50 ml</span>
         </div>
       </article>
 
-      <article class="product" data-product='{"name":"Alvens Godteri – Mix 1","price":89,"sku":"MIX-001"}' aria-labelledby="p4">
-        <img src="/images/mix1.png" alt="Alvens Godteri - Mix 1" loading="lazy" />
-        <h3 id="p4">Alvens Godteri – Mix 1</h3>
-        <p class="price">89 kr</p>
+      <!-- Reishi -->
+      <article class="product" data-product='{"name":"Reishi Sopp Tinktur","price":139,"sku":"REI-001"}' aria-labelledby="p-reishi">
+        <img src="images/reishi-sopp-tinktur.png" alt="Reishi Sopp Tinktur" loading="lazy" onerror="this.src='images/placeholder.png'"/>
+        <h3 id="p-reishi">Reishi Sopp Tinktur</h3>
+        <p class="price">139 kr</p>
         <div class="meta">
-          <button class="btn" onclick="addToCart('Mix 1',89,'/images/mix1.png')">Legg i kurv</button>
-          <span style="color:var(--muted);font-size:13px">200 g</span>
+          <button class="btn" onclick="addToCart('Reishi Sopp Tinktur',139,'images/reishi-sopp-tinktur.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">50 ml</span>
         </div>
       </article>
+
     </section>
 
   </main>
 
-  <!-- Cart drawer -->
   <div id="cart" role="dialog" aria-label="Handlekurv" aria-hidden="true">
     <h2>Handlekurv</h2>
     <ul id="cart-items" aria-live="polite"></ul>
@@ -176,23 +194,17 @@
     </div>
   </footer>
 
-  <!-- JSON-LD for products / shop -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Store",
     "name":"Alvens Godteri",
     "url":"https://alvensgodteri.no",
-    "telephone":"+4712345678",
-    "potentialAction": {
-      "@type": "OrderAction",
-      "target": "https://alvensgodteri.no/checkout"
-    }
+    "telephone":"+4712345678"
   }
   </script>
 
   <script>
-    // small helpers & cart logic with localStorage
     document.getElementById('year').textContent = new Date().getFullYear();
 
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -200,7 +212,6 @@
     function saveCart(){ localStorage.setItem('cart', JSON.stringify(cart)); renderCart(); updateCartCount(); }
 
     function addToCart(name, price, img) {
-      // try merge by name -> increment qty
       const idx = cart.findIndex(i => i.name === name);
       if(idx > -1){
         cart[idx].qty += 1;
@@ -208,7 +219,6 @@
         cart.push({name, price: Number(price), qty:1, img: img || ''});
       }
       saveCart();
-      // analytics hook (example)
       if(window.dataLayer) window.dataLayer.push({event:'add_to_cart', item_name: name, value: price});
     }
 
@@ -230,7 +240,7 @@
         const li = document.createElement('li');
         li.innerHTML = `
           <div style="display:flex;gap:8px;align-items:center">
-            <img src="${it.img||'/images/placeholder.png'}" alt="${it.name}" style="width:46px;height:46px;object-fit:cover;border-radius:6px"/>
+            <img src="${it.img||'images/placeholder.png'}" alt="${it.name}" style="width:46px;height:46px;object-fit:cover;border-radius:6px"/>
             <div>
               <div style="font-weight:700">${it.name}</div>
               <div style="font-size:13px;color:#666">${it.qty} x ${it.price} kr</div>
@@ -262,28 +272,22 @@
     }
 
     function checkout(){
-      // push analytics + redirect to checkout page (implement checkout server-side)
       if(window.dataLayer) window.dataLayer.push({event:'begin_checkout', value: Number(document.getElementById('cart-total').innerText)});
-      // For now navigate to /checkout (replace with your checkout url)
       window.location.href = '/checkout';
     }
 
-    // subscribe form (placeholder - replace with your endpoint)
     document.getElementById('subscribe-form').addEventListener('submit', function(e){
       e.preventDefault();
       const email = document.getElementById('subscribe-email').value;
-      // Store locally and fire analytics; replace with fetch to your subscription API
       localStorage.setItem('subscribedEmail', email);
       alert('Takk! Rabattkoden er sendt til: ' + email);
       if(window.dataLayer) window.dataLayer.push({event:'newsletter_subscribed', email});
       this.reset();
     });
 
-    // init
     renderCart();
     updateCartCount();
 
-    // hero variant switcher (simple A/B)
     (function applyHeroVariant(){
       const container = document.getElementById('hero-variants');
       const variant = container.getAttribute('data-variant') || 'value';
@@ -291,7 +295,6 @@
       els.forEach(el => el.style.display = (el.getAttribute('data-variant') === variant) ? 'block' : 'none');
     })();
 
-    // abandoned cart trigger idea: (not sending emails here, just placeholder)
     window.addEventListener('beforeunload', function(){
       if(cart.length > 0 && window.dataLayer) window.dataLayer.push({event:'abandoned_cart_candidate', cart});
     });
