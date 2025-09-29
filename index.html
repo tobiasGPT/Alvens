@@ -1,100 +1,300 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Alvens Godteri | Nettbutikk</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Lora&display=swap" rel="stylesheet">
+  <meta name="description" content="Alvens Godteri — naturlige tinkturer og godteri. Få 10% på første bestilling. Rask levering i hele Norge." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;400&family=Lora&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Alvens Godteri | Nettbutikk" />
+  <meta property="og:description" content="Naturlige tinkturer & mixpakker. 10% rabatt på første kjøp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="theme-color" content="#ffe6e6" />
   <style>
-    body { margin:0; font-family:Lora, serif; background:#ffe6e6; color:#111; }
-    header { background:#fff; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; }
-    header h1 { font-family:Poppins, sans-serif; margin:0; font-size:28px; }
-    nav a { margin:0 10px; text-decoration:none; color:#111; font-weight:bold; }
-    .products { padding:40px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
-    .product { background:#fff; border-radius:12px; padding:20px; width:250px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    .product img { width:100%; border-radius:8px; }
-    button { margin-top:10px; padding:10px 15px; border:none; border-radius:8px; background:#111; color:#fff; cursor:pointer; }
-    button:hover { background:#333; }
-    #cart { position:fixed; top:0; right:0; width:300px; height:100%; background:#fff; box-shadow:-2px 0 6px rgba(0,0,0,0.2); padding:20px; overflow-y:auto; display:none; }
-    #cart h2 { font-family:Poppins, sans-serif; }
-    footer { background:#111; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+    :root{
+      --bg:#ffe6e6;
+      --card:#fff;
+      --accent:#111;
+      --muted:#666;
+      --radius:12px;
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Lora, serif;background:var(--bg);color:var(--accent);line-height:1.4}
+    header{background:var(--card);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+    .container{max-width:var(--container);margin:0 auto;padding:0 16px}
+    h1{font-family:Poppins, sans-serif;margin:0;font-size:26px}
+    nav a{margin:0 10px;text-decoration:none;color:var(--accent);font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;padding:36px 0}
+    .hero-left h2{margin:0 0 12px;font-size:28px;font-family:Poppins, sans-serif}
+    .hero-left p{color:var(--muted);margin:0 0 18px}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn.secondary{background:transparent;color:var(--accent);border:2px solid rgba(0,0,0,.06)}
+    .price-badge{display:inline-block;background:#fff;padding:6px 10px;border-radius:999px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.06);margin-left:6px}
+    .hero-right{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .products{display:flex;gap:20px;flex-wrap:wrap;padding:24px 0;justify-content:center}
+    .product{background:var(--card);border-radius:var(--radius);padding:14px;width:240px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .product img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    .product h3{margin:12px 0 6px;font-size:16px}
+    .product p{margin:0;color:var(--muted)}
+    .product .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .product .price{font-weight:700}
+    .cart-toggle{position:fixed;right:16px;bottom:16px;background:var(--accent);color:#fff;padding:12px;border-radius:999px;cursor:pointer;z-index:60}
+    /* cart drawer */
+    #cart{position:fixed;right:0;top:0;width:360px;height:100%;background:var(--card);box-shadow:-8px 0 30px rgba(0,0,0,.12);padding:20px;overflow:auto;transform:translateX(110%);transition:transform .28s ease-in-out;z-index:80}
+    #cart.open{transform:translateX(0)}
+    #cart h2{font-family:Poppins, sans-serif;margin-top:0}
+    #cart-items{list-style:none;padding:0;margin:0}
+    #cart-items li{display:flex;justify-content:space-between;margin:10px 0;align-items:center}
+    .qty{display:inline-flex;gap:6px;align-items:center}
+    footer{background:var(--accent);color:#fff;text-align:center;padding:20px;margin-top:30px}
+    .newsletter{display:flex;gap:8px;margin-top:12px}
+    input[type="email"]{padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,.08);flex:1}
+    @media(max-width:880px){
+      .hero{grid-template-columns:1fr; padding-bottom:8px}
+      .hero-right{order:2}
+    }
   </style>
 </head>
 <body>
-  <header>
+  <header class="container" role="banner">
     <h1>Alvens Godteri</h1>
-    <nav>
-      <a href="#">Produkter</a>
-      <a href="#">Om oss</a>
-      <a href="#">Kontakt</a>
-      <a href="#" onclick="toggleCart()">🛒 Handlekurv (<span id="cart-count">0</span>)</a>
+    <nav aria-label="Hovedmeny">
+      <a href="#products">Produkter</a>
+      <a href="#about">Om oss</a>
+      <a href="#contact">Kontakt</a>
+      <a href="#" id="open-cart-link" onclick="toggleCart();return false">🛒 Handlekurv (<span id="cart-count">0</span>)</a>
     </nav>
   </header>
 
-  <section class="products">
-    <div class="product">
-      <img src="ROSENROT TINKTUR.png" alt="Rosenrot Tinktur">
-      <h3>Rosenrot Tinktur</h3>
-      <p>129 kr</p>
-      <button onclick="addToCart('Rosenrot Tinktur', 129)">Legg i kurv</button>
-    </div>
-    <div class="product">
-      <img src="cordyTINKTUR.png" alt="Cordyceps Tinktur">
-      <h3>Cordyceps Tinktur</h3>
-      <p>149 kr</p>
-      <button onclick="addToCart('Cordyceps Tinktur', 149)">Legg i kurv</button>
-    </div>
-    <div class="product">
-      <img src="REISHI SOPP  TINKTUR.png" alt="Reishi Sopp Tinktur">
-      <h3>Reishi Sopp Tinktur</h3>
-      <p>139 kr</p>
-      <button onclick="addToCart('Reishi Sopp Tinktur', 139)">Legg i kurv</button>
-    </div>
-    <div class="product">
-      <img src="Gemini_Generated_Image_a765yua765yua765.png" alt="Mix 1">
-      <h3>Alvens Godteri – Mix 1</h3>
-      <p>89 kr</p>
-      <button onclick="addToCart('Mix 1', 89)">Legg i kurv</button>
-    </div>
-  </section>
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <!-- Tre ferdige headline-varianter. Bytt data-variant="consult" til aggr eller value for A/B -->
+        <div id="hero-variants" data-variant="value">
+          <!-- Aggressive -->
+          <h2 id="hero-heading" data-variant="aggr" style="display:none">Klar for bedre dagsform? Kjøp nå — begrenset lager!</h2>
+          <!-- Consultative -->
+          <h2 data-variant="consult" style="display:none">Naturlige tinkturer som støtter hverdagen — vi hjelper deg finne riktig produkt.</h2>
+          <!-- Value-driven (default) -->
+          <h2 data-variant="value">Naturlige tinkturer & kjærlighet på glass — 10% på første bestilling</h2>
+        </div>
+        <p>Rask levering i hele Norge. Håndplukkede ingredienser og trygg betaling.</p>
 
-  <aside id="cart">
+        <div class="cta-row" role="region" aria-label="Hoved-CTA">
+          <button class="btn" id="primary-cta">Kjøp populære produkter</button>
+          <button class="btn secondary" id="phone-cta" onclick="location.href='tel:+4712345678'">Ring oss: +47 12 34 56 78</button>
+          <span class="price-badge">Fri frakt over 499 kr</span>
+        </div>
+
+        <div class="newsletter" aria-label="Nyhetsbrev">
+          <form id="subscribe-form">
+            <input type="email" id="subscribe-email" placeholder="Din epost — få 10% rabatt" aria-label="Epost" required />
+            <button class="btn" type="submit">Få rabatt</button>
+          </form>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-labelledby="promo-heading">
+        <h3 id="promo-heading">Ukens tilbud</h3>
+        <p style="margin:8px 0 12px;color:var(--muted)">Spar 20% på Mix 1 — begrenset antall.</p>
+        <div style="display:flex;gap:12px;align-items:center">
+          <img src="/images/promo-mix1.jpg" alt="Mix 1 tilbud" style="width:120px;height:120px;border-radius:8px;object-fit:cover" loading="lazy" />
+          <div>
+            <strong>Mix 1</strong>
+            <div style="margin-top:8px">
+              <button class="btn" onclick="addToCart('Mix 1', 89, '/images/promo-mix1.jpg')">Legg i kurv</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="products" class="products" aria-label="Produkter">
+      <!-- Produktkort generert statisk for enkelhet -->
+      <article class="product" data-product='{"name":"Rosenrot Tinktur","price":129,"sku":"ROS-001"}' aria-labelledby="p1">
+        <img src="/images/rosenrot.png" alt="Rosenrot Tinktur" loading="lazy" />
+        <h3 id="p1">Rosenrot Tinktur</h3>
+        <p class="price">129 kr</p>
+        <div class="meta">
+          <button class="btn" onclick="addToCart('Rosenrot Tinktur',129,'/images/rosenrot.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">50 ml</span>
+        </div>
+      </article>
+
+      <article class="product" data-product='{"name":"Cordyceps Tinktur","price":149,"sku":"COR-001"}' aria-labelledby="p2">
+        <img src="/images/cordyceps.png" alt="Cordyceps Tinktur" loading="lazy" />
+        <h3 id="p2">Cordyceps Tinktur</h3>
+        <p class="price">149 kr</p>
+        <div class="meta">
+          <button class="btn" onclick="addToCart('Cordyceps Tinktur',149,'/images/cordyceps.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">50 ml</span>
+        </div>
+      </article>
+
+      <article class="product" data-product='{"name":"Reishi Sopp Tinktur","price":139,"sku":"REI-001"}' aria-labelledby="p3">
+        <img src="/images/reishi.png" alt="Reishi Sopp Tinktur" loading="lazy" />
+        <h3 id="p3">Reishi Sopp Tinktur</h3>
+        <p class="price">139 kr</p>
+        <div class="meta">
+          <button class="btn" onclick="addToCart('Reishi Sopp Tinktur',139,'/images/reishi.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">50 ml</span>
+        </div>
+      </article>
+
+      <article class="product" data-product='{"name":"Alvens Godteri – Mix 1","price":89,"sku":"MIX-001"}' aria-labelledby="p4">
+        <img src="/images/mix1.png" alt="Alvens Godteri - Mix 1" loading="lazy" />
+        <h3 id="p4">Alvens Godteri – Mix 1</h3>
+        <p class="price">89 kr</p>
+        <div class="meta">
+          <button class="btn" onclick="addToCart('Mix 1',89,'/images/mix1.png')">Legg i kurv</button>
+          <span style="color:var(--muted);font-size:13px">200 g</span>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- Cart drawer -->
+  <div id="cart" role="dialog" aria-label="Handlekurv" aria-hidden="true">
     <h2>Handlekurv</h2>
-    <ul id="cart-items"></ul>
+    <ul id="cart-items" aria-live="polite"></ul>
     <p><strong>Total: <span id="cart-total">0</span> kr</strong></p>
-    <button onclick="checkout()">Til kassen</button>
-  </aside>
+    <button class="btn" id="checkout-btn" onclick="checkout()">Gå til kassen</button>
+    <button class="btn secondary" onclick="toggleCart()">Lukk</button>
+  </div>
 
-  <footer>
-    <p>Meld deg på nyhetsbrevet – få 10% rabatt på første bestilling</p>
+  <button class="cart-toggle" id="cart-floating" aria-label="Åpne handlekurv" onclick="toggleCart()">🛒 <span id="cart-float-count">0</span></button>
+
+  <footer id="contact">
+    <div class="container">
+      <p>Meld deg på nyhetsbrevet – få 10% rabatt på første bestilling</p>
+      <p>© <span id="year"></span> Alvens Godteri — Org.nr: 999 999 999</p>
+    </div>
   </footer>
 
-  <script>
-    let cart = [];
-    function addToCart(product, price) {
-      cart.push({product, price});
-      document.getElementById('cart-count').innerText = cart.length;
-      renderCart();
+  <!-- JSON-LD for products / shop -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Store",
+    "name":"Alvens Godteri",
+    "url":"https://alvensgodteri.no",
+    "telephone":"+4712345678",
+    "potentialAction": {
+      "@type": "OrderAction",
+      "target": "https://alvensgodteri.no/checkout"
     }
-    function renderCart() {
-      const itemsList = document.getElementById('cart-items');
-      itemsList.innerHTML = '';
+  }
+  </script>
+
+  <script>
+    // small helpers & cart logic with localStorage
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    function saveCart(){ localStorage.setItem('cart', JSON.stringify(cart)); renderCart(); updateCartCount(); }
+
+    function addToCart(name, price, img) {
+      // try merge by name -> increment qty
+      const idx = cart.findIndex(i => i.name === name);
+      if(idx > -1){
+        cart[idx].qty += 1;
+      } else {
+        cart.push({name, price: Number(price), qty:1, img: img || ''});
+      }
+      saveCart();
+      // analytics hook (example)
+      if(window.dataLayer) window.dataLayer.push({event:'add_to_cart', item_name: name, value: price});
+    }
+
+    function removeFromCart(i){
+      cart.splice(i,1);
+      saveCart();
+    }
+
+    function changeQty(i, delta){
+      cart[i].qty = Math.max(1, cart[i].qty + delta);
+      saveCart();
+    }
+
+    function renderCart(){
+      const items = document.getElementById('cart-items');
+      items.innerHTML = '';
       let total = 0;
-      cart.forEach(item => {
+      cart.forEach((it, i) => {
         const li = document.createElement('li');
-        li.textContent = `${item.product} – ${item.price} kr`;
-        itemsList.appendChild(li);
-        total += item.price;
+        li.innerHTML = `
+          <div style="display:flex;gap:8px;align-items:center">
+            <img src="${it.img||'/images/placeholder.png'}" alt="${it.name}" style="width:46px;height:46px;object-fit:cover;border-radius:6px"/>
+            <div>
+              <div style="font-weight:700">${it.name}</div>
+              <div style="font-size:13px;color:#666">${it.qty} x ${it.price} kr</div>
+            </div>
+          </div>
+          <div class="qty">
+            <button onclick="changeQty(${i},-1)" aria-label="Minsk">−</button>
+            <span style="min-width:28px;text-align:center">${it.qty}</span>
+            <button onclick="changeQty(${i},1)" aria-label="Øk">+</button>
+            <button onclick="removeFromCart(${i})" style="margin-left:8px">Fjern</button>
+          </div>
+        `;
+        items.appendChild(li);
+        total += it.price * it.qty;
       });
       document.getElementById('cart-total').innerText = total;
     }
-    function toggleCart() {
+
+    function updateCartCount(){
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      document.getElementById('cart-count').innerText = count;
+      document.getElementById('cart-float-count').innerText = count;
+    }
+
+    function toggleCart(){
       const cartEl = document.getElementById('cart');
-      cartEl.style.display = (cartEl.style.display === 'block') ? 'none' : 'block';
+      const isOpen = cartEl.classList.toggle('open');
+      cartEl.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     }
-    function checkout() {
-      alert('Checkout funksjon kommer snart!');
+
+    function checkout(){
+      // push analytics + redirect to checkout page (implement checkout server-side)
+      if(window.dataLayer) window.dataLayer.push({event:'begin_checkout', value: Number(document.getElementById('cart-total').innerText)});
+      // For now navigate to /checkout (replace with your checkout url)
+      window.location.href = '/checkout';
     }
+
+    // subscribe form (placeholder - replace with your endpoint)
+    document.getElementById('subscribe-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('subscribe-email').value;
+      // Store locally and fire analytics; replace with fetch to your subscription API
+      localStorage.setItem('subscribedEmail', email);
+      alert('Takk! Rabattkoden er sendt til: ' + email);
+      if(window.dataLayer) window.dataLayer.push({event:'newsletter_subscribed', email});
+      this.reset();
+    });
+
+    // init
+    renderCart();
+    updateCartCount();
+
+    // hero variant switcher (simple A/B)
+    (function applyHeroVariant(){
+      const container = document.getElementById('hero-variants');
+      const variant = container.getAttribute('data-variant') || 'value';
+      const els = container.querySelectorAll('[data-variant]');
+      els.forEach(el => el.style.display = (el.getAttribute('data-variant') === variant) ? 'block' : 'none');
+    })();
+
+    // abandoned cart trigger idea: (not sending emails here, just placeholder)
+    window.addEventListener('beforeunload', function(){
+      if(cart.length > 0 && window.dataLayer) window.dataLayer.push({event:'abandoned_cart_candidate', cart});
+    });
   </script>
 </body>
 </html>
